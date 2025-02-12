@@ -36,6 +36,11 @@
             border-top: 2px solid #dda6e3; /* Pink line after each section */
             padding-top: 20px;
         }
+
+        /* Center all text */
+        body, section, footer, header, .collage, .quiz, .days-known {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -87,9 +92,7 @@
         <p>Missing the America vibes? Click to listen to a little America core playlist including some of the bangers I was shocked you hadn't heard before</p>
     </section>
 
-    <!-- Footer Section -->
     <footer>
-        <p>Can't wait for all our future memories! 😘</p> <!-- New line added before "Love, Fallon" -->
         <p>Love, Fallon <span class="heart">&#10084;</span></p>
     </footer>
 
@@ -127,7 +130,7 @@
             },
             {
                 question: "What do I study?",
-                answer: "aerospace",
+                answer: "aerospace engineering",
                 options: ["Aerospace Engineering", "Computer Science", "Electrical Engineering"]
             },
             {
@@ -149,8 +152,10 @@
         }
 
         function answerQuestion(answer) {
-            const correctAnswer = questions[questionIndex].answer;
-            if (answer.toLowerCase() === correctAnswer.toLowerCase()) {  // Ensure case-insensitivity
+            const correctAnswer = questions[questionIndex].answer.toLowerCase().trim(); // Normalize the answer to lowercase and trim spaces
+            const userAnswer = answer.toLowerCase().trim(); // Normalize the user input
+
+            if (userAnswer === correctAnswer) {
                 questionIndex++;
                 if (questionIndex < questions.length) {
                     showQuestion(questionIndex);
