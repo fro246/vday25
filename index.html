@@ -140,10 +140,22 @@
             }
         ];
 
+        // Shuffle the options in each question
+        function shuffleOptions(options) {
+            for (let i = options.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [options[i], options[j]] = [options[j], options[i]]; // Swap elements
+            }
+            return options;
+        }
+
         function showQuestion(index) {
             const question = questions[index];
             const questionElement = document.getElementById("question");
-            const optionsHTML = question.options.map(option => 
+            
+            const shuffledOptions = shuffleOptions([...question.options]);
+
+            const optionsHTML = shuffledOptions.map(option => 
                 `<button onclick="answerQuestion('${option}')">${option}</button>`
             ).join('');
             
