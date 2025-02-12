@@ -38,7 +38,7 @@
         }
 
         /* Center all text */
-        body, section, footer, header, .collage, .quiz, .days-known, .map-section, .firsts {
+        body, section, footer, header, .collage, .quiz, .days-known, .map-section {
             text-align: center;
         }
 
@@ -47,56 +47,6 @@
             width: 80%;
             height: 300px;
             margin: 0 auto;
-        }
-
-        /* Flipping Cards Section */
-        .card-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .card {
-            width: 200px;
-            height: 300px;
-            perspective: 1000px;
-        }
-
-        .card-inner {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.6s;
-        }
-
-        .card:hover .card-inner {
-            transform: rotateY(180deg);
-        }
-
-        .card-front, .card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.5em;
-            text-align: center;
-            padding: 10px;
-        }
-
-        .card-back {
-            transform: rotateY(180deg);
-        }
-
-        /* Styling for the image in the card */
-        .card-back img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
         }
     </style>
 
@@ -146,68 +96,6 @@
         </div>
     </section>
 
-    <!-- Firsts Section (flipping cards) -->
-    <section class="firsts">
-        <h2>Our "Firsts" Together</h2>
-        <div class="card-container">
-            <div class="card">
-                <div class="card-inner">
-                    <div class="card-front">
-                        NYC Rooftop Bar
-                    </div>
-                    <div class="card-back">
-                        <img src="https://example.com/ophelia_bar.jpg" alt="Ophelia Bar">
-                        <p>Ophelia Bar</p>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-inner">
-                    <div class="card-front">
-                        Philly Cheesesteak
-                    </div>
-                    <div class="card-back">
-                        <img src="https://example.com/angelos_pizza.jpg" alt="Angelos Pizza">
-                        <p>Angelo's Pizza</p>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-inner">
-                    <div class="card-front">
-                        NYC Slice
-                    </div>
-                    <div class="card-back">
-                        <img src="https://example.com/lindustrie_pizza.jpg" alt="L'Industrie Pizza">
-                        <p>L'Industrie Pizza</p>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-inner">
-                    <div class="card-front">
-                        Best Car
-                    </div>
-                    <div class="card-back">
-                        <img src="https://example.com/chrysler_pacifica.jpg" alt="Chrysler Pacifica">
-                        <p>Chrysler Pacifica</p>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-inner">
-                    <div class="card-front">
-                        Favorite Grocery Store
-                    </div>
-                    <div class="card-back">
-                        <img src="https://example.com/costco.jpg" alt="Costco">
-                        <p>Costco</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Interactive Map Section -->
     <section class="map-section">
         <h2>Our Journey on the Map</h2>
@@ -216,7 +104,7 @@
 
     <!-- Spotify Playlist Section (with link and album cover) -->
     <section class="spotify">
-        <h2>My Valentine Playlist</h2>
+        <h2>Valentine's Playlist</h2>
         <a href="https://open.spotify.com/playlist/4P328r7KC7Ik7KN9gNPHuq?si=57969da5c411400d&pt=68fae1401419dce0ab83df14d2d4bdda" target="_blank">
             <img src="https://github.com/fro246/vday25/blob/main/IMG_2570.JPG?raw=true" alt="Spotify Playlist" class="album-cover"/>
         </a>
@@ -318,13 +206,11 @@
             {name: 'Los Angeles', coords: [34.0522, -118.2437], color: 'red'},
             {name: 'New York City', coords: [40.7128, -74.0060], color: 'blue'},
             {name: 'Philadelphia', coords: [39.9526, -75.1652], color: 'blue'},
-            {name: 'Paris', coords: [48.8566, 2.3522], color: 'blue'},
-            {name: 'Tokyo', coords: [35.6762, 139.6503], color: 'blue'},
-            {name: 'Barcelona', coords: [41.3851, 2.1734], color: 'blue'}
+            {name: "Washington DC', coords: [38.9072, -77.0369], color: 'blue'}
         ];
 
         cities.forEach(city => {
-            L.marker(city.coords, {color: city.color})
+            L.marker(city.coords, {icon: L.icon({iconUrl: `https://upload.wikimedia.org/wikipedia/commons/e/ec/Red_circle.svg`, iconSize: [12, 12], iconAnchor: [6, 6]})})
                 .addTo(map)
                 .bindPopup(city.name);
         });
