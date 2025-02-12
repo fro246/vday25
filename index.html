@@ -5,6 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Valentine's Day!</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Add styles to make section headers larger */
+        h2 {
+            font-size: 2.5em;
+            margin-top: 20px;
+        }
+        
+        /* Increase envelope size */
+        .envelope {
+            cursor: pointer;
+            display: inline-block;
+            width: 150px;  /* Make the envelope bigger */
+            height: auto;
+        }
+
+        .envelope-image {
+            width: 100%;
+            max-width: 150px;  /* Update the envelope image size */
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 <body>
 
@@ -30,6 +52,22 @@
         </div>
     </section>
 
+    <!-- Days Known Counter -->
+    <section class="days-known">
+        <h2>Days We've Known Each Other</h2>
+        <div id="days-counter"></div>
+    </section>
+
+    <!-- Quiz Section -->
+    <section class="quiz">
+        <h2>How Well Do You Know Me?</h2>
+        <div class="quiz-question" id="question-container">
+            <p id="question"></p>
+            <button onclick="answerQuestion('green')">Green</button>
+            <button onclick="answerQuestion('Chrysler Pacifica')">Chrysler Pacifica</button>
+        </div>
+    </section>
+
     <!-- Spotify Playlist Section (with link and album cover) -->
     <section class="spotify">
         <h2>My Valentine Playlist</h2>
@@ -44,6 +82,59 @@
     </footer>
 
     <script>
+        // Days Known Counter Function
+        const firstDate = new Date('2024-07-30');
+        const today = new Date();
+        const timeDiff = today - firstDate;
+        const daysKnown = Math.floor(timeDiff / (1000 * 3600 * 24));
+
+        document.getElementById('days-counter').innerHTML = `${daysKnown} days`;
+
+        // Quiz Functionality
+        let questionIndex = 0;
+        const questions = [
+            {
+                question: "What's my favorite color?",
+                answer: "green",
+                options: ["Green", "Blue", "Red"]
+            },
+            {
+                question: "What car did we drive on our road trip?",
+                answer: "Chrysler Pacifica",
+                options: ["Chrysler Pacifica", "Honda Civic", "Tesla Model 3"]
+            },
+            // Add more questions here
+        ];
+
+        function showQuestion(index) {
+            const question = questions[index];
+            const questionElement = document.getElementById("question");
+            const optionsHTML = question.options.map(option => 
+                `<button onclick="answerQuestion('${option}')">${option}</button>`
+            ).join('');
+            
+            questionElement.innerHTML = question.question;
+            document.getElementById("question-container").innerHTML = questionElement.outerHTML + optionsHTML;
+        }
+
+        function answerQuestion(answer) {
+            const correctAnswer = questions[questionIndex].answer;
+            if (answer === correctAnswer) {
+                questionIndex++;
+                if (questionIndex < questions.length) {
+                    showQuestion(questionIndex);
+                } else {
+                    document.getElementById("question-container").innerHTML = "<p>You've completed the quiz! 😊</p>";
+                }
+            } else {
+                alert("Oops! Try again.");
+            }
+        }
+
+        // Start the quiz with the first question
+        showQuestion(questionIndex);
+
+        // Valentine's Card Toggle Function
         function openCard() {
             document.getElementById("card").style.display = "block";
             document.querySelector(".envelope").classList.add("card-open");
@@ -51,3 +142,4 @@
     </script>
 </body>
 </html>
+
