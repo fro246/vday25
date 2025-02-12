@@ -3,29 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Valentine's Day Gift</title>
+    <title>Valentine's Day!</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+    <!-- Header with Valentine's color and hearts -->
     <header>
-        <h1>Happy Valentine's Day, Phil!</h1>
+        <h1><span class="header-heart">❤️</span> Happy Valentine's Day, Phil! <span class="header-heart">❤️</span></h1>
     </header>
 
-    <section class="intro">
-        <p>Here's a special page I made just for you! I hope you love it!</p>
+    <!-- Collage Section (replace the image URL with your collage image) -->
+    <section class="collage">
+        <img src="https://github.com/fro246/vday25/blob/main/IMG_2594.jpg?raw=true" alt="Collage of Our Memories" />
     </section>
 
-    <section class="memories">
-        <h2>Our Favorite Memories</h2>
-        <ul>
-            <li>Our trip to the East Coast</li>
-            <li>The first time we met</li>
-            <li>Your favorite inside joke</li>
-        </ul>
+    <!-- Valentine's Card Section (interactive pop-out card) -->
+    <section class="card-container">
+        <h2>Click to be my Valentine!</h2>
+        <div class="envelope" onclick="openCard()">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Envelope_icon.svg/1200px-Envelope_icon.svg.png" alt="Envelope" class="envelope-image">
+        </div>
+        <div class="valentines-card" id="card">
+            <textarea placeholder="Happy Valentine's Day! I love you so much and you're the best first valentine I could ever wish for! Thank you for being such a bright and amazing part of my life."></textarea>
+        </div>
+    </section>
+
+    <!-- Spotify Playlist Section (with link and album cover) -->
+    <section class="spotify">
+        <h2>My Valentine Playlist</h2>
+        <a href="https://open.spotify.com/playlist/4P328r7KC7Ik7KN9gNPHuq?si=57969da5c411400d&pt=68fae1401419dce0ab83df14d2d4bdda" target="_blank">
+            <img src="https://github.com/fro246/vday25/blob/main/IMG_2570.JPG?raw=true" alt="Spotify Playlist" class="album-cover"/>
+        </a>
+        <p>Missing the America vibes? Click to listen to a little America core playlist including some of the bangers I was shocked you hadn't heard before</p>
     </section>
 
     <footer>
         <p>Love, Fallon</p>
     </footer>
+
+    <script>
+        function openCard() {
+            document.getElementById("card").style.display = "block";
+            document.querySelector(".envelope").classList.add("card-open");
+        }
+    </script>
 </body>
 </html>
