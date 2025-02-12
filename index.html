@@ -49,7 +49,6 @@
             margin: 0 auto;
         }
     </style>
-
     <!-- Include Leaflet.js library -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
@@ -104,7 +103,7 @@
 
     <!-- Spotify Playlist Section (with link and album cover) -->
     <section class="spotify">
-        <h2>Valentine's Playlist</h2>
+        <h2>My Valentine Playlist</h2>
         <a href="https://open.spotify.com/playlist/4P328r7KC7Ik7KN9gNPHuq?si=57969da5c411400d&pt=68fae1401419dce0ab83df14d2d4bdda" target="_blank">
             <img src="https://github.com/fro246/vday25/blob/main/IMG_2570.JPG?raw=true" alt="Spotify Playlist" class="album-cover"/>
         </a>
@@ -168,53 +167,75 @@
             return options;
         }
 
-        function loadQuestion() {
-            const currentQuestion = questions[questionIndex];
-            document.getElementById('question').textContent = currentQuestion.question;
-            const shuffledOptions = shuffleOptions(currentQuestion.options);
-            document.querySelectorAll('.quiz-question button').forEach((button, index) => {
-                button.textContent = shuffledOptions[index];
-            });
+        function showQuestion(index) {
+            const question = questions[index];
+            const questionElement = document.getElementById("question");
+            
+            const shuffledOptions = shuffleOptions([...question.options]);
+
+            const optionsHTML = shuffledOptions.map(option => 
+                `<button onclick="answerQuestion('${option}')">${option}</button>`
+            ).join('');
+            
+            questionElement.innerHTML = question.question;
+            document.getElementById("question-container").innerHTML = questionElement.outerHTML + optionsHTML;
         }
 
         function answerQuestion(answer) {
-            const currentQuestion = questions[questionIndex];
-            if (answer === currentQuestion.answer) {
-                alert("Correct! 🥳");
+            const correctAnswer = questions[questionIndex].answer.toLowerCase().trim(); // Normalize the answer to lowercase and trim spaces
+            const userAnswer = answer.toLowerCase().trim(); // Normalize the user input
+
+            if (userAnswer === correctAnswer) {
+                questionIndex++;
+                if (questionIndex < questions.length) {
+                    showQuestion(questionIndex);
+                } else {
+                    document.getElementById("question-container").innerHTML = "<p>You've completed the quiz! 😊</p>";
+                }
             } else {
-                alert("Oops! Try again 🤔");
+                alert("Oops! Try again.");
             }
-            questionIndex = (questionIndex + 1) % questions.length;
-            loadQuestion();
         }
 
-        // Initialize the first question
-        loadQuestion();
+        // Start the quiz with the first question
+        showQuestion(questionIndex);
 
-        // Map functionality (with red markers on specified cities)
-        const map = L.map('map').setView([51.505, -0.09], 2);
+        // Valentine's Card Toggle Function
+        function openCard() {
+            document.getElementById("card").style.display = "block";
+            document.querySelector(".envelope").classList.add("card-open");
+        }
 
+        // Initialize the map
+        var map = L.map('map').setView([48.1351, 11.5820], 2); // Set to Munich, Germany (location where you met)
+
+        // Add OpenStreetMap tile layer
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        const cities = [
-            {name: 'Singapore', coords: [1.3521, 103.8198], color: 'red'},
-            {name: 'Melbourne', coords: [-37.8136, 144.9631], color: 'red'},
-            {name: 'Munich', coords: [48.1351, 11.5820], color: 'red'},
-            {name: 'Princeton', coords: [40.3430, -74.6514], color: 'red'},
-            {name: 'Los Angeles', coords: [34.0522, -118.2437], color: 'red'},
-            {name: 'New York City', coords: [40.7128, -74.0060], color: 'blue'},
-            {name: 'Philadelphia', coords: [39.9526, -75.1652], color: 'blue'},
-            {name: "Washington DC", coords: [38.9072, -77.0369], color: 'blue'}
-        ];
+        // Add markers for significant places
+        L.marker([48.1351, 11.5820]).addTo(map) // Munich, where you met
+            .bindPopup("Where we met! 💕")
+            .openPopup();
 
-        cities.forEach(city => {
-            L.marker(city.coords, {icon: L.icon({iconUrl: `https://upload.wikimedia.org/wikipedia/commons/e/ec/Red_circle.svg`, iconSize: [12, 12], iconAnchor: [6, 6]})})
-                .addTo(map)
-                .bindPopup(city.name);
-        });
+        L.marker([40.3473, -74.6572]).addTo(map) // Princeton, NJ
+            .bindPopup("Princeton, NJ - A fun memory!")
+            .openPopup();
+
+        L.marker([38.9072, -77.0369]).addTo(map) // Washington, DC
+            .bindPopup("Washington, DC - A special trip!")
+            .openPopup();
+
+        L.marker([39.9526, -75.1652]).addTo(map) // Philadelphia
+            .bindPopup("Philadelphia - A sweet adventure!")
+            .openPopup();
+
+        L.marker([40.7128, -74.0060]).addTo(map) // NYC
+            .bindPopup("New York City - So many memories!")
+            .openPopup();
     </script>
+
 </body>
 </html>
 
