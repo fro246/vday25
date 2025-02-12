@@ -38,7 +38,7 @@
         }
 
         /* Center all text */
-        body, section, footer, header, .collage, .quiz, .days-known, .map-section {
+        body, section, footer, header, .collage, .quiz, .days-known, .map-section, .firsts {
             text-align: center;
         }
 
@@ -48,7 +48,58 @@
             height: 300px;
             margin: 0 auto;
         }
+
+        /* Flipping Cards Section */
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .card {
+            width: 200px;
+            height: 300px;
+            perspective: 1000px;
+        }
+
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+
+        .card:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5em;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+        }
+
+        /* Styling for the image in the card */
+        .card-back img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     </style>
+
     <!-- Include Leaflet.js library -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
@@ -92,6 +143,68 @@
             <p id="question"></p>
             <button onclick="answerQuestion('green')">Green</button>
             <button onclick="answerQuestion('Chrysler Pacifica')">Chrysler Pacifica</button>
+        </div>
+    </section>
+
+    <!-- Firsts Section (flipping cards) -->
+    <section class="firsts">
+        <h2>Our "Firsts" Together</h2>
+        <div class="card-container">
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        NYC Rooftop Bar
+                    </div>
+                    <div class="card-back">
+                        <img src="https://example.com/ophelia_bar.jpg" alt="Ophelia Bar">
+                        <p>Ophelia Bar</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        Philly Cheesesteak
+                    </div>
+                    <div class="card-back">
+                        <img src="https://example.com/angelos_pizza.jpg" alt="Angelos Pizza">
+                        <p>Angelo's Pizza</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        NYC Slice
+                    </div>
+                    <div class="card-back">
+                        <img src="https://example.com/lindustrie_pizza.jpg" alt="L'Industrie Pizza">
+                        <p>L'Industrie Pizza</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        Best Car
+                    </div>
+                    <div class="card-back">
+                        <img src="https://example.com/chrysler_pacifica.jpg" alt="Chrysler Pacifica">
+                        <p>Chrysler Pacifica</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        Favorite Grocery Store
+                    </div>
+                    <div class="card-back">
+                        <img src="https://example.com/costco.jpg" alt="Costco">
+                        <p>Costco</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -167,76 +280,54 @@
             return options;
         }
 
-        function showQuestion(index) {
-            const question = questions[index];
-            const questionElement = document.getElementById("question");
-            
-            const shuffledOptions = shuffleOptions([...question.options]);
-
-            const optionsHTML = shuffledOptions.map(option => 
-                `<button onclick="answerQuestion('${option}')">${option}</button>`
-            ).join('');
-            
-            questionElement.innerHTML = question.question;
-            document.getElementById("question-container").innerHTML = questionElement.outerHTML + optionsHTML;
+        function loadQuestion() {
+            const currentQuestion = questions[questionIndex];
+            document.getElementById('question').textContent = currentQuestion.question;
+            const shuffledOptions = shuffleOptions(currentQuestion.options);
+            document.querySelectorAll('.quiz-question button').forEach((button, index) => {
+                button.textContent = shuffledOptions[index];
+            });
         }
 
         function answerQuestion(answer) {
-            const correctAnswer = questions[questionIndex].answer.toLowerCase().trim(); // Normalize the answer to lowercase and trim spaces
-            const userAnswer = answer.toLowerCase().trim(); // Normalize the user input
-
-            if (userAnswer === correctAnswer) {
-                questionIndex++;
-                if (questionIndex < questions.length) {
-                    showQuestion(questionIndex);
-                } else {
-                    document.getElementById("question-container").innerHTML = "<p>You've completed the quiz! 😊</p>";
-                }
+            const currentQuestion = questions[questionIndex];
+            if (answer === currentQuestion.answer) {
+                alert("Correct! 🥳");
             } else {
-                alert("Oops! Try again.");
+                alert("Oops! Try again 🤔");
             }
+            questionIndex = (questionIndex + 1) % questions.length;
+            loadQuestion();
         }
 
-        // Start the quiz with the first question
-        showQuestion(questionIndex);
+        // Initialize the first question
+        loadQuestion();
 
-        // Valentine's Card Toggle Function
-        function openCard() {
-            document.getElementById("card").style.display = "block";
-            document.querySelector(".envelope").classList.add("card-open");
-        }
+        // Map functionality (with red markers on specified cities)
+        const map = L.map('map').setView([51.505, -0.09], 2);
 
-        // Initialize the map
-        var map = L.map('map').setView([48.1351, 11.5820], 2); // Set to Munich, Germany (location where you met)
-
-        // Add OpenStreetMap tile layer
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        // Add markers for significant places
-        L.marker([48.1351, 11.5820]).addTo(map) // Munich, where you met
-            .bindPopup("Where we met! 💕")
-            .openPopup();
+        const cities = [
+            {name: 'Singapore', coords: [1.3521, 103.8198], color: 'red'},
+            {name: 'Melbourne', coords: [-37.8136, 144.9631], color: 'red'},
+            {name: 'Munich', coords: [48.1351, 11.5820], color: 'red'},
+            {name: 'Princeton', coords: [40.3430, -74.6514], color: 'red'},
+            {name: 'Los Angeles', coords: [34.0522, -118.2437], color: 'red'},
+            {name: 'New York City', coords: [40.7128, -74.0060], color: 'blue'},
+            {name: 'Philadelphia', coords: [39.9526, -75.1652], color: 'blue'},
+            {name: 'Paris', coords: [48.8566, 2.3522], color: 'blue'},
+            {name: 'Tokyo', coords: [35.6762, 139.6503], color: 'blue'},
+            {name: 'Barcelona', coords: [41.3851, 2.1734], color: 'blue'}
+        ];
 
-        L.marker([40.3473, -74.6572]).addTo(map) // Princeton, NJ
-            .bindPopup("Princeton, NJ - A fun memory!")
-            .openPopup();
-
-        L.marker([38.9072, -77.0369]).addTo(map) // Washington, DC
-            .bindPopup("Washington, DC - A special trip!")
-            .openPopup();
-
-        L.marker([39.9526, -75.1652]).addTo(map) // Philadelphia
-            .bindPopup("Philadelphia - A sweet adventure!")
-            .openPopup();
-
-        L.marker([40.7128, -74.0060]).addTo(map) // NYC
-            .bindPopup("New York City - So many memories!")
-            .openPopup();
+        cities.forEach(city => {
+            L.marker(city.coords, {color: city.color})
+                .addTo(map)
+                .bindPopup(city.name);
+        });
     </script>
-
 </body>
 </html>
-
-
