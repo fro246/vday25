@@ -87,7 +87,9 @@
         <p>Missing the America vibes? Click to listen to a little America core playlist including some of the bangers I was shocked you hadn't heard before</p>
     </section>
 
+    <!-- Footer Section -->
     <footer>
+        <p>Can't wait for all our future memories! 😘</p> <!-- New line added before "Love, Fallon" -->
         <p>Love, Fallon <span class="heart">&#10084;</span></p>
     </footer>
 
@@ -98,7 +100,7 @@
         const timeDiff = today - firstDate;
         const daysKnown = Math.floor(timeDiff / (1000 * 3600 * 24));
 
-        document.getElementById('days-counter').innerHTML = `${daysKnown} days, since July 30, 2024`;
+        document.getElementById('days-counter').innerHTML = `${daysKnown} days, since July 30, 2024 😘`;
 
         // Quiz Functionality
         let questionIndex = 0;
@@ -113,7 +115,26 @@
                 answer: "Chrysler Pacifica",
                 options: ["Chrysler Pacifica", "Honda Civic", "Tesla Model 3"]
             },
-            // Add more questions here
+            {
+                question: "Where was I born?",
+                answer: "Greece",
+                options: ["Greece", "Italy", "USA"]
+            },
+            {
+                question: "What instrument did I play growing up?",
+                answer: "cello",
+                options: ["Cello", "Piano", "Violin"]
+            },
+            {
+                question: "What do I study?",
+                answer: "aerospace",
+                options: ["Aerospace Engineering", "Computer Science", "Electrical Engineering"]
+            },
+            {
+                question: "What's my zodiac sign?",
+                answer: "sagittarius",
+                options: ["Sagittarius", "Capricorn", "Aquarius"]
+            }
         ];
 
         function showQuestion(index) {
