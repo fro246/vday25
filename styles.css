@@ -1,6 +1,14 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+}
+
 /* Header styles */
 header {
-    background-color: #ff6f61; /* Valentine's pink color */
+    background-color: #FF6F61; /* Valentine's pink color */
     text-align: center;
     padding: 20px;
 }
@@ -16,13 +24,13 @@ header h1 {
 
 /* Collage image styles */
 .collage-img {
-    width: 80%; /* Set to 80% of the page width */
+    width: 80%; /* Make the image responsive */
     margin: 20px auto;
     display: block;
-    border-radius: 10px; /* Rounded corners for a cute look */
+    border-radius: 10px; /* Round the edges for a cute look */
 }
 
-/* Valentine's Card styles */
+/* Valentine's Card Section */
 .card-container {
     text-align: center;
     margin-top: 30px;
@@ -43,9 +51,9 @@ header h1 {
 }
 
 .valentines-card {
-    display: none; /* Start hidden */
+    display: none; /* Hide the card by default */
     margin-top: 20px;
-    background-color: #ff6f61;
+    background-color: #FF6F61; /* Valentine's pink color */
     padding: 20px;
     border-radius: 10px;
     width: 80%;
@@ -57,7 +65,7 @@ header h1 {
     min-height: 100px;
     padding: 10px;
     font-size: 1.1em;
-    border: 2px solid #ff6f61;
+    border: 2px solid #FF6F61;
     border-radius: 10px;
     resize: none;
     box-sizing: border-box;
@@ -66,7 +74,7 @@ header h1 {
 
 .valentines-card textarea:focus {
     outline: none;
-    border-color: #ff6f61;
+    border-color: #FF6F61;
 }
 
 /* Spotify Album Cover styles */
@@ -86,5 +94,11 @@ footer {
 
 footer p {
     font-size: 1.2em;
-    color: #ff6f61; /* Match the header pink */
+    color: #FF6F61; /* Same pink as header */
 }
+
+/* Envelope image when clicked */
+.envelope.card-open {
+    transform: rotate(45deg); /* Rotate envelope when clicked */
+}
+
