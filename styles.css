@@ -1,107 +1,90 @@
-/* General Styles */
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f8f8f8;
-    margin: 0;
-    padding: 0;
-    color: #333;
-}
-
-/* Header Styles */
+/* Header styles */
 header {
-    background-color: #FFB6C1;  /* Light red for Valentine's feel */
-    color: white;
+    background-color: #ff6f61; /* Valentine's pink color */
     text-align: center;
-    padding: 50px 0;
+    padding: 20px;
 }
 
-h1 {
-    font-size: 3em;
+header h1 {
+    color: white;
+    font-size: 2.5em;
 }
 
 .header-heart {
     font-size: 1.5em;
-    color: #FF6F61; /* A slightly deeper red for hearts */
 }
 
-/* Collage Section Styles */
-.collage {
+/* Collage image styles */
+.collage-img {
+    width: 80%; /* Set to 80% of the page width */
+    margin: 20px auto;
+    display: block;
+    border-radius: 10px; /* Rounded corners for a cute look */
+}
+
+/* Valentine's Card styles */
+.card-container {
     text-align: center;
     margin-top: 30px;
 }
 
-.collage img {
-    width: 80%;
-    max-width: 600px;
-    border-radius: 10px;
-}
-
-/* Valentine's Card Pop-out Styles */
-.card-container {
-    text-align: center;
-    margin-top: 50px;
-}
-
 .envelope {
-    width: 100px;
-    height: 70px;
     cursor: pointer;
-    transition: transform 0.5s ease;
-    margin: 0 auto;
+    display: inline-block;
+    width: 80px;
+    height: auto;
 }
 
 .envelope-image {
     width: 100%;
-    height: auto;
+    max-width: 80px; /* Set envelope image to a reasonable size */
+    display: block;
+    margin: 0 auto;
 }
 
 .valentines-card {
-    display: none;
-    width: 300px;
-    height: 200px;
-    background-color: #fff;
-    border: 2px solid #ff6f61;
+    display: none; /* Start hidden */
+    margin-top: 20px;
+    background-color: #ff6f61;
+    padding: 20px;
     border-radius: 10px;
+    width: 80%;
     margin: 20px auto;
-    padding: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
 .valentines-card textarea {
     width: 100%;
-    height: 100%;
+    min-height: 100px;
     padding: 10px;
     font-size: 1.1em;
-    border: none;
-    border-radius: 5px;
-}
-
-.card-open {
-    transform: translateY(-50px); /* The effect when card "pops out" */
-}
-
-/* Spotify Playlist Section Styles */
-.spotify {
-    text-align: center;
-    margin-top: 30px;
-}
-
-.album-cover {
-    width: 250px;
-    height: 250px;
+    border: 2px solid #ff6f61;
     border-radius: 10px;
-    transition: transform 0.3s ease;
+    resize: none;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
 }
 
-.album-cover:hover {
-    transform: scale(1.05); /* Adds a zoom effect when hovering */
+.valentines-card textarea:focus {
+    outline: none;
+    border-color: #ff6f61;
 }
 
-/* Footer Styles */
+/* Spotify Album Cover styles */
+.album-cover {
+    width: 100px; /* Set to a smaller square size */
+    height: 100px;
+    object-fit: cover; /* Ensure the image doesn't get distorted */
+    margin: 20px auto;
+    display: block;
+}
+
+/* Footer styles */
 footer {
     text-align: center;
-    padding: 20px;
-    font-size: 1em;
-    background-color: #333;
-    color: white;
+    margin-top: 40px;
+}
+
+footer p {
+    font-size: 1.2em;
+    color: #ff6f61; /* Match the header pink */
 }
