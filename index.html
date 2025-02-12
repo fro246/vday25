@@ -154,7 +154,7 @@
             },
             {
                 question: "What's my zodiac sign?",
-                answer: "sagittarius",
+                answer: "Sagittarius",
                 options: ["Sagittarius", "Capricorn", "Aquarius"]
             }
         ];
@@ -206,14 +206,20 @@
             {name: 'Los Angeles', coords: [34.0522, -118.2437], color: 'red'},
             {name: 'New York City', coords: [40.7128, -74.0060], color: 'blue'},
             {name: 'Philadelphia', coords: [39.9526, -75.1652], color: 'blue'},
-            {name: "Washington DC', coords: [38.9072, -77.0369], color: 'blue'}
+            {name: "Washington DC", coords: [38.9072, -77.0369], color: 'blue'}
         ];
 
         cities.forEach(city => {
-            L.marker(city.coords, {icon: L.icon({iconUrl: `https://upload.wikimedia.org/wikipedia/commons/e/ec/Red_circle.svg`, iconSize: [12, 12], iconAnchor: [6, 6]})})
-                .addTo(map)
-                .bindPopup(city.name);
+            const marker = L.marker(city.coords, {
+                icon: L.icon({
+                    iconUrl: city.color === 'red' ? 'https://upload.wikimedia.org/wikipedia/commons/e/ec/Red_circle.svg' : 'https://upload.wikimedia.org/wikipedia/commons/a/a6/Blue_circle.svg',
+                    iconSize: [12, 12],
+                    iconAnchor: [6, 6]
+                })
+            }).addTo(map)
+              .bindPopup(city.name);
         });
     </script>
 </body>
 </html>
+
