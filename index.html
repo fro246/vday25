@@ -11,20 +11,30 @@
             font-size: 2.5em;
             margin-top: 20px;
         }
-        
+
         /* Increase envelope size */
         .envelope {
             cursor: pointer;
             display: inline-block;
-            width: 150px;  /* Make the envelope bigger */
+            width: 200px;  /* Increase the envelope size */
             height: auto;
         }
 
         .envelope-image {
             width: 100%;
-            max-width: 150px;  /* Update the envelope image size */
+            max-width: 200px;  /* Update the envelope image size */
             display: block;
             margin: 0 auto;
+        }
+
+        /* Add a pink horizontal line after each section */
+        section {
+            margin-bottom: 40px;
+        }
+
+        section + section {
+            border-top: 2px solid #dda6e3; /* Pink line after each section */
+            padding-top: 20px;
         }
     </style>
 </head>
@@ -88,7 +98,7 @@
         const timeDiff = today - firstDate;
         const daysKnown = Math.floor(timeDiff / (1000 * 3600 * 24));
 
-        document.getElementById('days-counter').innerHTML = `${daysKnown} days`;
+        document.getElementById('days-counter').innerHTML = `${daysKnown} days, since July 30, 2024`;
 
         // Quiz Functionality
         let questionIndex = 0;
@@ -119,7 +129,7 @@
 
         function answerQuestion(answer) {
             const correctAnswer = questions[questionIndex].answer;
-            if (answer === correctAnswer) {
+            if (answer.toLowerCase() === correctAnswer.toLowerCase()) {  // Ensure case-insensitivity
                 questionIndex++;
                 if (questionIndex < questions.length) {
                     showQuestion(questionIndex);
@@ -142,4 +152,5 @@
     </script>
 </body>
 </html>
+
 
