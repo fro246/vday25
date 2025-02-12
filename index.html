@@ -41,11 +41,6 @@
         body, section, footer, header, .collage, .quiz, .days-known {
             text-align: center;
         }
-
-        /* Set the map height */
-        #map {
-            height: 400px; /* Set the height of the map */
-        }
     </style>
 </head>
 <body>
@@ -53,7 +48,7 @@
     <!-- Header with Valentine's color and hearts -->
     <header>
         <h1><span class="header-heart">❤️</span> Happy Valentine's Day, Phil! <span class="header-heart">❤️</span></h1>
-        <h4>Since you're dating a nerd, I made you a little website, I hope you like it!</h4>
+        <h4>Since you're dating a nerd, I made you a little website, I hope you like it!</h3>
     </header>
 
     <!-- Collage Section (replace the image URL with your collage image) -->
@@ -69,7 +64,8 @@
             <img src="https://github.com/fro246/vday25/blob/main/envelope2.jpg?raw=true" alt="Envelope" class="envelope-image">
         </div>
         <div class="valentines-card" id="card">
-            <textarea placeholder="Happy Valentine's Day! I love you so much and you're the best first valentine I could ever wish for! Thank you for being such a bright and amazing part of my life. I loved spending every minute with you since we met at the rooftop and during our trip. Sunshine, rain, or snowstorm I'm so excited to make more memories together!"></textarea>
+            <textarea placeholder="Happy Valentine's Day! 
+                I love you so much and you're the best first valentine I could ever wish for! Thank you for being such a bright and amazing part of my life. I loved spending every minute with you since we met at the rooftop and during our trip. Sunshine, rain, or snowstorm I'm so excited to make more memories together!"></textarea>
         </div>
     </section>
 
@@ -77,10 +73,6 @@
     <section class="days-known">
         <h2>Days We've Known Each Other</h2>
         <div id="days-counter"></div>
-
-        <!-- Interactive Map Section -->
-        <h3>Our Journey Together</h3>
-        <div id="map"></div>
     </section>
 
     <!-- Quiz Section -->
@@ -106,8 +98,6 @@
         <p>Love, Fallon <span class="heart">&#10084;</span></p>
     </footer>
 
-    <!-- Leaflet.js Libraries -->
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
         // Days Known Counter Function
         const firstDate = new Date('2024-07-30');
@@ -117,34 +107,6 @@
 
         document.getElementById('days-counter').innerHTML = `${daysKnown} days, since July 30, 2024 😘`;
 
-        // Initialize the map
-        var map = L.map('map').setView([48.1351, 11.5820], 5);  // Centered around Munich, Germany (adjust zoom level)
-
-        // Add tile layer (background style)
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-
-        // Marker for where you met in Munich
-        L.marker([48.1351, 11.5820]).addTo(map)
-            .bindPopup("<b>Where We Met</b><br>Munich, Germany");
-
-        // Markers for places you've traveled together
-        L.marker([40.3497, -74.6518]).addTo(map)  // Princeton, NJ
-            .bindPopup("<b>Princeton, NJ</b><br>Our first road trip!");
-        
-        L.marker([38.8954, -77.0365]).addTo(map)  // Washington DC
-            .bindPopup("<b>Washington, DC</b><br>History and monuments!");
-        
-        L.marker([39.9526, -75.1652]).addTo(map)  // Philadelphia
-            .bindPopup("<b>Philadelphia</b><br>So many fun adventures!");
-        
-        L.marker([40.7128, -74.0060]).addTo(map)  // New York City
-            .bindPopup("<b>New York City</b><br>Great memories in the city that never sleeps!");
-        
-    </script>
-
-    <script>
         // Quiz Functionality
         let questionIndex = 0;
         const questions = [
