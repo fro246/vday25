@@ -20,6 +20,7 @@ header h1 {
 
 .header-heart {
     font-size: 1.8em; /* Slightly larger hearts */
+    animation: pulse 2s infinite ease-in-out; /* Pulsing effect */
 }
 
 /* Collage image styles */
@@ -29,6 +30,11 @@ header h1 {
     margin: 20px auto;
     display: block;
     border-radius: 10px; /* Round the edges for a cute look */
+    transition: transform 0.3s ease-in-out; /* Hover zoom effect */
+}
+
+.collage-img:hover {
+    transform: scale(1.05);
 }
 
 /* Valentine's Card Section */
@@ -42,6 +48,7 @@ header h1 {
     display: inline-block;
     width: 80px;
     height: auto;
+    animation: bounce 0.5s ease; /* Envelope bounce animation */
 }
 
 .envelope-image {
@@ -59,6 +66,7 @@ header h1 {
     border-radius: 10px;
     width: 80%;
     margin: 20px auto;
+    animation: fadeInCard 1s ease-out forwards; /* Fade-in effect */
 }
 
 .valentines-card textarea {
@@ -102,6 +110,7 @@ footer p {
 
 footer .heart {
     color: #dda6e3; /* Pink heart */
+    animation: bounceHeart 1s infinite ease-in-out; /* Heart bounce */
 }
 
 /* Envelope opened effect */
@@ -110,19 +119,73 @@ footer .heart {
     transition: transform 0.3s ease-in-out; /* Smooth transition */
 }
 
-/* Mobile responsiveness */
-@media (max-width: 600px) {
-    header h1 {
-        font-size: 2.5em; /* Slightly smaller on mobile */
-    }
+/* Button Hover Effects */
+button {
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
 
-    .collage-img {
-        width: 100%;
-    }
+button:hover {
+    transform: scale(1.1); /* Slightly enlarge on hover */
+    background-color: #dda6e3; /* Change background color to pink */
+}
 
-    .album-cover {
-        width: 120px;
-        height: 120px;
-    }
+/* Hover Effect for Text */
+h1:hover, h2:hover, p:hover {
+    color: #FF6F61; /* Change text color to pink when hovered */
+}
+
+/* Smooth Scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Map Fade-in Effect */
+@keyframes fadeInMap {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.map-section {
+    animation: fadeInMap 1.5s ease-out forwards;
+}
+
+/* General Fade-in Effect for Sections */
+@keyframes fadeInSection {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+section {
+    animation: fadeInSection 1s ease-out forwards;
+}
+
+/* Envelope Bounce Animation */
+@keyframes bounce {
+    0% { transform: scale(1); }
+    20% { transform: scale(1.1); }
+    40% { transform: scale(1); }
+    60% { transform: scale(1.1); }
+    80% { transform: scale(1); }
+    100% { transform: scale(1); }
+}
+
+/* Valentine's Card Fade-in Effect */
+@keyframes fadeInCard {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* Header Heart Pulse Animation */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* Footer Heart Bounce Animation */
+@keyframes bounceHeart {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
 }
 
