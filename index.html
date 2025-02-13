@@ -48,6 +48,43 @@
             height: 300px;
             margin: 0 auto;
         }
+
+        /* Horoscope Section Styles */
+        .horoscope {
+            background-color: #fff2f9;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .horoscope h2 {
+            font-size: 2em;
+            color: #FF6F61;
+            font-weight: bold;
+        }
+
+        .horoscope-sign h3 {
+            color: #FF6F61;
+            font-size: 1.5em;
+            margin-top: 20px;
+        }
+
+        .horoscope-sign p {
+            font-size: 1.2em;
+            margin: 10px 0;
+            color: #444;
+        }
+
+        .compatibility {
+            margin-top: 30px;
+            font-size: 1.2em;
+            color: #333;
+            background-color: #f7f7f7;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
     </style>
     <!-- Include Leaflet.js library -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
@@ -101,7 +138,6 @@
         <div id="map"></div>
     </section>
 
-
     <!-- Spotify Playlist Section (with link and album cover) -->
     <section class="spotify">
         <h2>Valentine's Playlist</h2>
@@ -109,6 +145,36 @@
             <img src="https://github.com/fro246/vday25/blob/main/IMG_2570.JPG?raw=true" alt="Spotify Playlist" class="album-cover"/>
         </a>
         <p>Missing the America vibes? Click to listen to a little America core playlist including some of the bangers I was shocked you hadn't heard before</p>
+    </section>
+
+    <!-- Horoscope Section -->
+    <section class="horoscope">
+        <h2>Your Daily Horoscope</h2>
+        <p><i>I know we both aren't into horoscopes, but it was easy to code</i></p>
+
+        <!-- Sagittarius (Your horoscope) -->
+        <div class="horoscope-sign">
+            <h3>Sagittarius (December 15, 2003)</h3>
+            <p id="sagittarius-horoscope">
+                Loading...
+            </p>
+        </div>
+
+        <!-- Virgo (His horoscope) -->
+        <div class="horoscope-sign">
+            <h3>Virgo (September 22, 1999)</h3>
+            <p id="virgo-horoscope">
+                Loading...
+            </p>
+        </div>
+
+        <!-- Compatibility Section -->
+        <div class="compatibility">
+            <h3>Compatibility: Sagittarius & Virgo</h3>
+            <p>
+                Loading compatibility...
+            </p>
+        </div>
     </section>
 
     <footer>
@@ -201,7 +267,6 @@
         // Start the quiz with the first question
         showQuestion(questionIndex);
 
-
         // Valentine's Card Toggle Function
         function openCard() {
             document.getElementById("card").style.display = "block";
@@ -231,7 +296,31 @@
 
         L.marker([40.7128, -74.0060]).addTo(map) // NYC
             .openPopup();
+
+        // Horoscope API Integration
+        async function fetchHoroscope(sign) {
+            const response = await fetch(`https://aztro.sameerkumar.website?sign=${sign}&day=today`, {
+                method: 'POST',
+            });
+            const data = await response.json();
+            return data.description;
+        }
+
+        // Fetch both Sagittarius and Virgo horoscopes
+        async function displayHoroscopes() {
+            const sagittariusHoroscope = await fetchHoroscope('sagittarius');
+            const virgoHoroscope = await fetchHoroscope('virgo');
+            document.getElementById('sagittarius-horoscope').innerText = sagittariusHoroscope;
+            document.getElementById('virgo-horoscope').innerText = virgoHoroscope;
+            document.querySelector('.compatibility p').innerText = 
+                "Sagittarius and Virgo: Your energies may seem quite different, but together, you create a complementary and supportive bond.";
+        }
+
+        // Call function when the page loads
+        window.onload = displayHoroscopes;
+
     </script>
 
 </body>
 </html>
+
