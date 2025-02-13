@@ -114,6 +114,23 @@
     </div>
 </section>
 
+    <section class="virtual-kisses">
+    <h2>Send Me a Virtual Kiss 😘</h2>
+    <button onclick="sendKiss()">Send a Kiss</button>
+    <div id="kiss-container" style="margin-top: 10px;"></div>
+</section>
+
+<script>
+    function sendKiss() {
+        const kissContainer = document.getElementById('kiss-container');
+        const kiss = document.createElement('span');
+        kiss.textContent = "😘";
+        kiss.style.fontSize = '2em';
+        kissContainer.appendChild(kiss);
+    }
+</script>
+
+
 
     <!-- Spotify Playlist Section (with link and album cover) -->
     <section class="spotify">
