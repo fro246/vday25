@@ -101,27 +101,6 @@
         <div id="map"></div>
     </section>
 
-        <!-- Scavenger Hunt Section -->
-    <section class="scavenger-hunt">
-        <h2>Find the Hidden Clues!</h2>
-        <p>Click on the hidden objects to find your clues. You'll get a sweet message after you solve it!</p>
-        <div id="hunt-area">
-            <div class="hidden-item" data-clue="You've found the first clue! Keep going.">
-                <img src="https://via.placeholder.com/80x80/dda6e3/ffffff?text=❤️" alt="Hidden Item 1" />
-            </div>
-            <div class="hidden-item" data-clue="You're doing great! Only a few more to go!">
-                <img src="https://via.placeholder.com/80x80/dda6e3/ffffff?text=❤️" alt="Hidden Item 2" />
-            </div>
-            <div class="hidden-item" data-clue="Almost there! One last clue!">
-                <img src="https://via.placeholder.com/80x80/dda6e3/ffffff?text=❤️" alt="Hidden Item 3" />
-            </div>
-            <div class="hidden-item" data-clue="Congratulations, you've completed the hunt! Here's your prize: A kiss! 😘">
-                <img src="https://via.placeholder.com/80x80/dda6e3/ffffff?text=❤️" alt="Hidden Item 4" />
-            </div>
-        </div>
-        <div id="hunt-message"></div>
-    </section>
-
 
     <!-- Spotify Playlist Section (with link and album cover) -->
     <section class="spotify">
@@ -221,30 +200,6 @@
 
         // Start the quiz with the first question
         showQuestion(questionIndex);
-
-                // Scavenger Hunt Logic
-        document.querySelectorAll('.hidden-item').forEach(item => {
-            item.addEventListener('click', function() {
-                const clue = this.getAttribute('data-clue');
-                const messageContainer = document.getElementById('hunt-message');
-        
-                // Display the clue message
-                messageContainer.innerHTML = clue;
-        
-                // Disable the clicked item after it's clicked
-                this.style.pointerEvents = 'none'; // Prevent further clicks
-        
-                // Check if all items have been clicked
-                const allItemsClicked = document.querySelectorAll('.hidden-item[style="pointer-events: none;"]').length === document.querySelectorAll('.hidden-item').length;
-                
-                // If all items are clicked, display the final message
-                if (allItemsClicked) {
-                    setTimeout(() => {
-                        messageContainer.innerHTML = "Congrats! You've completed the scavenger hunt! 🎉🎉 Here's a reward: 💋";
-                    }, 500);
-                }
-            });
-        });
 
 
         // Valentine's Card Toggle Function
